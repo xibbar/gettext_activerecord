@@ -166,7 +166,7 @@ module ActiveRecord #:nodoc:
       if attr == "base"
         full_message = msgstr
       elsif /%\{attribute\}/ =~ msgstr
-        full_message = msgstr % {:attribute => @base.class.human_attribute_name(attr)}
+        full_message = msgstr.gsub(/%\{attribute\}/,@base.class.human_attribute_name(attr))
       elsif append_field
         full_message = @base.class.human_attribute_name(attr) + " " + msgstr
       else
